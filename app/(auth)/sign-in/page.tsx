@@ -11,11 +11,6 @@ import { signInWithEmail } from '@/lib/actions/auth.actions';
 
 import { toast } from 'sonner';
 
-type SignInFormData = {
-  email: string;
-  password: string;
-};
-
 const SignIn = () => {
   const router = useRouter();
 
@@ -37,7 +32,11 @@ const SignIn = () => {
 
       if (result.success) {
         toast.success('Welcome back!');
-        router.push('/dashboard');
+        router.push('/');
+      } else {
+        toast.error('Sign in failed', {
+          description: result.error || 'Invalid email or password.',
+        });
       }
     } catch (e) {
       toast.error('Sign in failed', {
@@ -52,11 +51,11 @@ const SignIn = () => {
   return (
     <>
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold text-gray-100">
           Welcome back
         </h1>
 
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 text-gray-400">
           Sign in to continue.
         </p>
       </div>
@@ -91,7 +90,7 @@ const SignIn = () => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-11"
+          className="w-full h-11 yellow-btn"
         >
           {isSubmitting
             ? 'Signing in...'

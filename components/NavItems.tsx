@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '../lib/constants';
@@ -25,7 +24,7 @@ const NavItems = () => {
               isActive(item.href) ? 'text-white' : ''
             }`}
           >
-            {item.title}
+            {item.label}
           </Link>
         </li>
       ))}
