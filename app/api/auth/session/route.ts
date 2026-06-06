@@ -1,14 +1,11 @@
 import { getAuth } from "@/lib/better-auth/auth";
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const auth = await getAuth();
     const session = await auth.api.getSession({
-      headers: new Headers({
-        cookie: (await cookies()).toString(),
-      }),
+      headers: request.headers,
     });
     
     return NextResponse.json(session || { user: null });
